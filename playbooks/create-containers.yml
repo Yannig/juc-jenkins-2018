@@ -9,6 +9,7 @@
         name: "{{network_name}}"
       delegate_to: "localhost"
       run_once: yes
+      when: network_name is defined
 
     - name: "Create containers"
       docker_container:
