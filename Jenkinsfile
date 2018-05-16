@@ -25,8 +25,18 @@ node {
         sh 'mv $destination.new $destination'
         sh 'rm -rf $destination.old'
     }
-    stage('deploy-dev') {
+    stage('prepare-dev') {
         call_ansible('ansible-playbook -i inventories/dev.inv playbooks/create-containers.yml')
+    }
+    stage('socle-dev') {
+        parallel(
+            'java': {
+                call_ansible('ansible-playbook -i inventories/dev.inv playbooks/install-jdk.yml')
+            },
+            'tomcat': {
+                call_ansible('ansible-playbook -i inventories/dev.inv playbooks/install-tomcat.yml')
+            }
+        )
     }
 /*
     } catch (Exception e) {
