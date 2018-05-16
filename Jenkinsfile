@@ -16,6 +16,9 @@ node {
         sh 'mv $destination.new $destination'
         sh 'rm -rf $destination.old'
     }
+    stage('deploy-dev') {
+        sh 'ansible -m debug localhost'
+    }
 /*
     } catch (Exception e) {
         slackSend (color: '#FF0000', message: "Failed Job '${env.JOB_NAME}' ${env.BUILD_URL}")
