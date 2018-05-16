@@ -9,7 +9,7 @@ node {
     }
     stage('build') {
         echo "Building sample.war"
-        sh 'zip -r /tmp/$version/sample.war sample'
+        sh 'zip -r ${destination}.new/sample.war sample'
     }
     stage('publication') {
         sh '[ -d $destination ] && mv $destination $destination.old || exit 0'
