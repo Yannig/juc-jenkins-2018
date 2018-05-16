@@ -1,5 +1,13 @@
-node {
+def call_ansible(cmd) {
     def env_value = [ "ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1" ]
+    withEnv(env_value) {
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+            sh cmd
+        }
+    }
+}
+
+node {
     checkout scm
     stage('init') {
         // Récupération du nom de la branche (master, v1, v2 etc.)
@@ -18,11 +26,7 @@ node {
         sh 'rm -rf $destination.old'
     }
     stage('deploy-dev') {
-        withEnv(env_value) {
-            wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-                sh 'ansible -m debug localhost'
-            }
-        }
+        call_ansible('ansible -m debug localhost')
     }
 /*
     } catch (Exception e) {
