@@ -1,0 +1,26 @@
+---
+
+- name: "Create docker container"
+  hosts: [ "all", "!localhost" ]
+  gather_facts: no
+  tasks:
+    - name: "Create network name"
+      docker_network:
+        name: "{{network_name}}"
+      delegate_to: "localhost"
+      run_once: yes
+
+    - name: "Create containers"
+      docker_container:
+        name:     "{{inventory_hostname}}"
+        hostname: "{{inventory_hostname}}"
+        networks:
+          - name: "{{network_name}}"
+        network_mode: "{{network_name}}"
+        image: "centos/systemd"
+        volumes: [ "/sys/fs/cgroup:/sys/fs/cgroup:ro" ]
+        state: "started"
+        privileged: "yes"
+        command: "/usr/lib/systemd/systemd"
+      delegate_to: "localhost"
+      when: ansible_connection|d('') == 'docker'

@@ -26,7 +26,7 @@ node {
         sh 'rm -rf $destination.old'
     }
     stage('deploy-dev') {
-        call_ansible('ansible -m debug localhost')
+        call_ansible('ansible-playbook -i inventories/dev.inv playbooks/create-containers.yml')
     }
 /*
     } catch (Exception e) {

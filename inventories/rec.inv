@@ -1,0 +1,6 @@
+[tomcat]
+rec-tomcat-1
+
+[all:vars]
+network_name=rec
+ansible_connection=docker

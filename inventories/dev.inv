@@ -1,0 +1,6 @@
+[tomcat]
+dev-tomcat-1
+
+[all:vars]
+network_name=dev
+ansible_connection=docker
