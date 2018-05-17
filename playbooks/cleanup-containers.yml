@@ -1,0 +1,18 @@
+---
+
+- name: "Remove docker container"
+  hosts: [ "all", "!localhost" ]
+  gather_facts: no
+  tasks:
+    - name: "Remove containers"
+      docker_container:
+        name:     "{{inventory_hostname}}"
+        state: "absent"
+      delegate_to: "localhost"
+      when: ansible_connection|d('') == 'docker'
+    - name: "Remove network name"
+      docker_network:
+        name: "{{network_name}}"
+      delegate_to: "localhost"
+      run_once: yes
+      when: network_name is defined

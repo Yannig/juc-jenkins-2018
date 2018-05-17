@@ -35,6 +35,9 @@ node {
     stage('configure') {
         call_ansible('ansible-playbook -i inventories/${version} playbooks/tomcat-service.yml')
     }
+    stage('clean-up') {
+        call_ansible('ansible-playbook -i inventories/${version} playbooks/cleanup-containers.yml')
+    }
 /*
     } catch (Exception e) {
         slackSend (color: '#FF0000', message: "Failed Job '${env.JOB_NAME}' ${env.BUILD_URL}")
