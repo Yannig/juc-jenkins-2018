@@ -1,0 +1,28 @@
+---
+
+- name: "Manage tomcat service"
+  hosts: "tomcat"
+  gather_facts: no
+  tasks:
+    - name: "Create tomcat service"
+      copy:
+        content: |-
+          [Unit]
+          Description=Tomcat server
+
+          [Service]
+          User=root
+          Environment=JAVA_HOME=/opt/java/jdk1.8.0_171
+          WorkingDirectory=/opt/tomcat/apache-tomcat-8.5.24
+          ExecStart=/opt/tomcat/apache-tomcat-8.5.24/bin/catalina.sh run
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: "/lib/systemd/system/tomcat.service"
+    - name: "Update service definition"
+      systemd:
+        daemon_reload: yes
+    - name: "Start tomcat"
+      service:
+        name: "tomcat"
+        state: started

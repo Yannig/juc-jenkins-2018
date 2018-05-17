@@ -38,6 +38,9 @@ node {
             }
         )
     }
+    stage('configure') {
+        call_ansible('ansible-playbook -i inventories/dev.inv playbooks/tomcat-service.yml')
+    }
 /*
     } catch (Exception e) {
         slackSend (color: '#FF0000', message: "Failed Job '${env.JOB_NAME}' ${env.BUILD_URL}")
