@@ -36,6 +36,12 @@ node {
         call_ansible('ansible-playbook -i inventories/${version} playbooks/tomcat-service.yml')
     }
     stage('clean-up') {
+        userInput = input(
+            id: 'Proceed1', message: 'Cleanup docker container?', parameters: [
+                [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
+            ]
+        )
+
         call_ansible('ansible-playbook -i inventories/${version} playbooks/cleanup-containers.yml')
     }
 /*
