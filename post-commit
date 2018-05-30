@@ -1,1 +1,1 @@
-curl http://localhost:8080/git/notifyCommit\?url\=file://$HOME/dev/jenkins
+curl http://localhost:8080/git/notifyCommit\?url\=file://$HOME/dev/juc-jenkins-2018
