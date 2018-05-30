@@ -10,5 +10,5 @@
         state: directory
     - name: "Unarchive JDK"
       unarchive:
-        src: "~/jdk-8u171-linux-x64.tar.gz"
+        src: "/tmp/jdk-8u171-linux-x64.tar.gz"
         dest: "/opt/java"

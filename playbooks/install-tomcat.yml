@@ -10,5 +10,5 @@
         state: directory
     - name: "Unarchive apache tomcat"
       unarchive:
-        src: "~/apache-tomcat-8.5.24.tar.gz"
+        src: "/tmp/apache-tomcat-8.5.24.tar.gz"
         dest: "/opt/tomcat"
