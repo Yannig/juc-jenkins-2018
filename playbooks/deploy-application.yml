@@ -1,0 +1,14 @@
+---
+
+- name: "Deploy application"
+  hosts: "tomcat"
+  gather_facts: no
+  tasks:
+    - name: "Copy war"
+      copy:
+        src: "{{war_to_deploy}}"
+        dest: "/opt/tomcat/apache-tomcat-9.0.8/webapps"
+    - name: "Restart tomcat"
+      service:
+        name: "tomcat"
+        state: restarted
