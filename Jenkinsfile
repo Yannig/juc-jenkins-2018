@@ -48,6 +48,9 @@ node {
     stage('configure') {
         call_ansible('ansible-playbook -i inventories/${version} playbooks/tomcat-service.yml')
     }
+    stage('deploy') {
+        call_ansible('ansible-playbook -i inventories/${version} playbooks/deploy-application.yml -e war_to_deploy=$WORKSPACE/sample.war')
+    }
     stage('clean-up') {
         userInput = input(
             id: 'Proceed1', message: 'Cleanup docker container?', parameters: [
