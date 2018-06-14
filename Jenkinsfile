@@ -31,11 +31,11 @@ node {
         echo "Building sample.war"
         sh 'cd sample && zip -r ../sample.war *'
     }
-    stage('prepare-dev') {
+/*    stage('prepare-dev') {
         call_ansible("ansible -m template -a 'src=inventories/template.inv.j2 dest=inventories/${version}' localhost -e env_type=${version}")
         call_ansible('ansible-playbook -i inventories/${version} playbooks/create-containers.yml')
-    }
-    stage('socle-dev') {
+    }*/
+/*    stage('socle-dev') {
         parallel(
             'java': {
                 call_ansible('ansible-playbook -i inventories/${version} playbooks/install-jdk.yml')
@@ -44,8 +44,8 @@ node {
                 call_ansible('ansible-playbook -i inventories/${version} playbooks/install-tomcat.yml')
             }
         )
-    }
-    stage('configure') {
+    }*/
+/*    stage('configure') {
         call_ansible('ansible-playbook -i inventories/${version} playbooks/tomcat-service.yml')
     }
     stage('deploy') {
@@ -59,7 +59,7 @@ node {
         )
 
         call_ansible('ansible-playbook -i inventories/${version} playbooks/cleanup-containers.yml')
-    }
+    }*/
 /*
     } catch (Exception e) {
         slackSend (color: '#FF0000', message: "Failed Job '${env.JOB_NAME}' ${env.BUILD_URL}")
