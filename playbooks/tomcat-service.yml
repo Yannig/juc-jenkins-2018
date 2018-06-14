@@ -12,9 +12,9 @@
 
           [Service]
           User=root
-          Environment=JAVA_HOME=/opt/java/jdk1.8.0_171
-          WorkingDirectory=/opt/tomcat/apache-tomcat-8.5.24
-          ExecStart=/opt/tomcat/apache-tomcat-8.5.24/bin/catalina.sh run
+          Environment=JAVA_HOME=/opt/java/jdk1.8.0_172
+          WorkingDirectory=/opt/tomcat/apache-tomcat-9.0.8
+          ExecStart=/opt/tomcat/apache-tomcat-9.0.8/bin/catalina.sh run
 
           [Install]
           WantedBy=multi-user.target
