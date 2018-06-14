@@ -29,7 +29,7 @@ node {
     }
     stage('build') {
         echo "Building sample.war"
-        sh 'zip -r sample.war sample'
+        sh 'cd sample && zip -r ../sample.war *'
     }
     stage('prepare-dev') {
         call_ansible("ansible -m template -a 'src=inventories/template.inv.j2 dest=inventories/${version}' localhost -e env_type=${version}")
