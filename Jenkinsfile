@@ -5,11 +5,13 @@ parameters = [
 // Retourne les properties à Jenkins pour savoir quoi demander à l'utilisateur
 properties([ parameters(parameters) ])
 
+/*
 // Sortie prématurée dans le cas où on veut juste rafraichir le job dans l'ancienne interface Jenkins
+// Désactivé dans le cadre de la démo
 if("${env.refresh}" != "false") {
   echo "Rafraichissement simple des paramètres Jenkins."
   return
-}
+} */
 
 def call_ansible(cmd) {
     def env_value = [ "ANSIBLE_FORCE_COLOR=true", "PYTHONUNBUFFERED=1" ]
